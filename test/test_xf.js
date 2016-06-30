@@ -8,7 +8,7 @@ tool.initialize(options.app_key, options.rest_key);
 function local_xf() {
 //调用hello.js云端代码
     var first = require("../cloud/xf.js").xf;
-    tool.test(first, {"name": "Bmob后端云"});
+    tool.test(first, {"objectId": "e2rlPPPV"});
 }
 local_xf();
 

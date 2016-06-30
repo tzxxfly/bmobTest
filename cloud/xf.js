@@ -23,17 +23,20 @@ function onRequest(request, response, modules) {
 
     //获取数据库对象
     var db = modules.oData;
+    var objectId = request.body.objectId;
     //获取Posts表中的所有值
     db.find({
         "table":"activity",          //表名
-        "keys":"username,type",         //返回字段列表，多个字段用,分隔
-        "where":{"objectId":"FTOLCCCD"},       //查询条件是一个JSON object
+        "keys":"username,title",         //返回字段列表，多个字段用,分隔
+        "where":{"objectId":objectId},       //查询条件是一个JSON object
         //"order":"-a,b",         //排序列表，[-]字段名称,-表示降序，默认为升序
-        "limit":10,            //limit大小，一页返回多少条记录，默认为0
+        //"limit":10,            //limit大小，一页返回多少条记录，默认为0
         //"skip":2,             //skip,分页offset，(page-1)*limit
-        "count":4            //count,只返回符合条件的记录总数
+        //"count":4            //count,只返回符合条件的记录总数
     },function(err,data){
-        response.write(JSON.stringify(data));
+
+        response.end(JSON.stringify(data));
+        //jsonTest();
     });
 
 
