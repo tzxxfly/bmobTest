@@ -1,4 +1,5 @@
 function onRequest(request, response, modules) {
+    
     var db = modules.oData;
     db.insert({
         "table": "GameObject",             //表名
