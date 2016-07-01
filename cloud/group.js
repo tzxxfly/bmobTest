@@ -10,10 +10,6 @@ function onRequest(request, response, modules) {
     var rel = modules.oRelation;
 
 
-    /*   ep.all('group',function (group) {
-     response.end(JSON.stringify(secretGroup) );
-     });*/
-
     var fillPath = function (pobject, results) {
         for (var i = 0; i < results.length; i++) {
             var object = results[i];
@@ -21,7 +17,6 @@ function onRequest(request, response, modules) {
                 if (object.parentId.objectId == pobject.objectId) {
                     object.fullPath = pobject.fullPath + object.objectId + "/";
                     object.fullPathName = pobject.fullPathName + object.groupName + "/";
-                    //results[i] = object;
                     fillPath(object, results);
                 }
             }
@@ -38,19 +33,38 @@ function onRequest(request, response, modules) {
     }, function (err, data) {
         //回调函数
         var results = JSON.parse(data).results;
+
+        ep.after('updateGroup', results.length, function (list) {
+            // 在所有文件的异步执行结束后将被执行
+            // 所有文件的内容都存在list数组中
+            response.end("len:" + list.length);
+        });
+
         for (var i = 0; i < results.length; i++) {
             var object = results[i];
-            //response.write(JSON.stringify(object) )
             if (!object.parentId) {
                 object.fullPathName = object.groupName + "/";
                 object.fullPath = object.objectId + "/";
-                //results[i] = object;
                 fillPath(object, results);
             }
-            //alert(object.id + ' - ' + object.get('playerName'));
         }
-        response.end(JSON.stringify(results));
-        //ep.emit('reldata', data);
+        for (var i = 0; i < results.length; i++) {
+            var object = results[i];
+            db.update({
+                "table": "group",
+                "objectId": object.objectId,
+                "data": {"fullPathName": object.fullPathName, "fullPath": object.fullPath}
+            }, function (err, data) {
+                if (!err) {
+                    ep.emit('updateGroup', data);
+                }
+                else {
+                    response.write(err);
+                    continue;
+                }
+            });
+        }
+
     });
 }
 exports.group = onRequest;

@@ -7,7 +7,7 @@ tool.initialize(options.app_key, options.rest_key);
 
 function local_xf() {
 //调用hello.js云端代码
-    var first = require("../cloud/oEventTest.js").oEventTest;
+    var first = require("../cloud/oEventAfterTest.js").oEventAfterTest;
     tool.test(first);
 }
 local_xf();

@@ -11,15 +11,15 @@ function onRequest(request, response, modules) {
 
 
     ep.all('tpl', 'data','reldata', 'secretGroup',function (tpl, data,reldata,secretGroup) {
-        response.end(JSON.stringify(secretGroup) );
+        response.end(JSON.stringify(reldata) );
     });
 
     db.find({
         "table":"activity",
         "keys": "username",
         "where":{
-            /*"userId":{"$select":{"where":{"nickname":"白衣飘飘"},"className":"user"}},
-            "$or":[{"username":"会飞的猪"}]*/
+            //"userId":{"$select":{"where":{"nickname":"白衣飘飘"},"className":"user"}},
+            //"$or":[{"username":"会飞的猪"},{"userId":{"$select":{"where":{"nickname":"会飞的猪"},"className":"user"}}}]
         },
     },function(err,data){
         //回调函数
