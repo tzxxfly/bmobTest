@@ -15,7 +15,7 @@ function onRequest(request, response, modules) {
     // });
     db.find({
         "table":"activity",
-        "keys": "objectId,title,content",
+        //"keys": "objectId,title,content",
         "where":{
             "userId":{"$select":{"where":{"objectId":"5f659fc1eb"},"className":"user"}},
             //"$or":[{"username":"会飞的猪"},{"userId":{"$select":{"where":{"nickname":"会飞的猪"},"className":"user"}}}]
@@ -25,7 +25,8 @@ function onRequest(request, response, modules) {
         //回调函数
         //ep.emit('activity', data);
         //response.end(JSON.stringify(data))
-
+        var data2=JSON.parse(data);
+        var results = JSON.parse(data).results;
         db.find({
             "table":"votetime",
             //"keys": "secretgroup",
