@@ -39,6 +39,19 @@ function onRequest(request, response, modules) {
             // 所有文件的内容都存在list数组中
             response.end("len:" + list.length);
         });
+        var ids="";
+        var sql="select * from group where 1=1 ";
+        for (var i = 0; i < results.length; i++) {
+            var object = results[i];
+            ids+="'"+object.objectId+"',";
+        }
+        ids= ids.substr(0,ids.length-1);
+        if(ids.length>0)
+        {
+            sql=sql+" and objectId in ( "+ids+")";
+        }
+
+
 
         for (var i = 0; i < results.length; i++) {
             var object = results[i];
@@ -59,8 +72,8 @@ function onRequest(request, response, modules) {
                     ep.emit('updateGroup', data);
                 }
                 else {
+                    ep.emit('updateGroup', data);
                     response.write(err);
-                    continue;
                 }
             });
         }
