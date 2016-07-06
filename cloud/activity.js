@@ -15,7 +15,7 @@ function onRequest(request, response, modules) {
     // });
     db.find({
         "table":"activity",
-        //"keys": "objectId,title,content",
+        //"keys": "*",
         "where":{
             "userId":{"$select":{"where":{"objectId":"5f659fc1eb"},"className":"user"}},
             //"$or":[{"username":"会飞的猪"},{"userId":{"$select":{"where":{"nickname":"会飞的猪"},"className":"user"}}}]
