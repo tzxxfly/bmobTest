@@ -8,7 +8,7 @@ tool.initialize(options.app_key, options.rest_key);
 function local_xf() {
 //调用hello.js云端代码
     var first = require("../cloud/obql.js").obql;
-    tool.test(first, {"objectId": "e2rlPPPV"});
+    tool.test(first, {"app_key": options.app_key, "rest_key": options.rest_key});
 }
 local_xf();
 
