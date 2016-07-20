@@ -11,7 +11,7 @@ function onRequest(request, response, modules) {
     var index = request.body.index;//当前页数
     if (!page)
         page = 100;
-    if (!index)
+    if (!index || index<=0)
         index = 1;
     var skip = page * (index - 1);
     var limit = page * (index - 1) + page;
@@ -57,6 +57,8 @@ function onRequest(request, response, modules) {
             }
             result.data = data.slice(skip, limit);
             result.total = data.length;
+            result.index = index;
+            result.page=page;
 
             response.end(JSON.stringify(result));
         }
