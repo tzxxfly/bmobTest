@@ -9,7 +9,7 @@ function local_xf() {
 //调用hello.js云端代码
     var first = require("../cloud/obql.js").obql;
     tool.test(first, {"app_key": options.app_key, "rest_key": options.rest_key,
-        "page":2,"index":2});
+        "page":5,"index":1,"activityId":"WZB3666L"});
 }
 local_xf();
 
