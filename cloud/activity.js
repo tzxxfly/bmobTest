@@ -60,3 +60,11 @@ function onRequest(request, response, modules) {
 
 }
 exports.activity = onRequest;
+
+function obql_refTest(text) {
+
+    
+    console.info(text);
+
+}
+exports.obql_refTest = obql_refTest;
