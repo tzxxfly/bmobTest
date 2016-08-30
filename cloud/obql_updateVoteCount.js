@@ -181,4 +181,4 @@ function onRequest(request, response, modules) {
     });*/
 
 }
-exports.obql = onRequest;
+exports.obql_updateVoteCount = onRequest;
